@@ -1,0 +1,17 @@
+   if($request->hasfile('image'))
+        {
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+
+            $filename = pathinfo($filenameWithExt,PATHINFO_FILENAME);
+
+            $extension = $request->file('image')->getClientOriginalExtension();
+            
+            $filenameToStore = $filename.'_'.time().'.'.$extension;
+
+           $path = $request->file('image')->storeAs('public/image',$filenameToStore);
+
+        }
+        else
+        {
+          $filenameToStore = 'noimage.jpg';
+        }
